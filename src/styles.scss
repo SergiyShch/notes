@@ -1,0 +1,109 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  background: #FFDEAD;
+  
+  .main { 
+    margin: 50px;
+    max-width: 800px;
+
+    h1 {
+      color: #ed3330;
+    }
+
+    .list {
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        margin: 0 0 15px 0;
+
+        a {
+          color: #000;
+        }
+
+      }
+    }
+
+    .child {
+      width: 60vw;
+      height: 50vw;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+  
+        input {
+          width: 60vw;
+          height: 3vh;
+          margin: 0 0 15px 0;
+        }
+  
+        textarea {
+          width: 60vw;
+          height:20vh;
+          margin: 0 0 15px 0;
+        }
+  
+        button{
+          color: #fff;
+          text-transform: uppercase;
+          text-decoration: none;
+          background: #ed3330;
+          padding: 10px;
+          border-radius: 5px;
+          display: inline-block;
+          border: none;
+          transition: all 0.4s ease 0s;
+          width: 10vw;
+
+          &:hover{
+            background: #fff;
+            color: #ed3330;
+          }
+        }
+      }
+
+      .item{
+        border: 1px solid #000;
+        margin: 0 0 15px 0;
+        background: #fff;
+
+        .buttons-row {
+          display: flex;
+          align-items: center;
+          justify-content: left;
+        }
+
+        button{
+          color: #fff;
+          text-transform: uppercase;
+          text-decoration: none;
+          background: #ed3330;
+          margin: 0 15px 5px 10px;
+          padding: 10px;
+          border-radius: 5px;
+          display: inline-block;
+          border: none;
+          transition: all 0.4s ease 0s;
+          width: 10vw;
+          outline: none;
+
+          &:hover{
+            background: #fff;
+            color: #ed3330;
+          }
+        }
+      }
+
+      .comment-item {
+        border: 1px solid #000;
+        margin: 0 0 15px 0;
+        background: #fff;
+        margin: 15px;
+      }
+    }
+  }
+}
