@@ -34,6 +34,7 @@ class NoteList extends React.Component {
   render() {
     return (
       <Fragment>
+        <h1>Note List</h1>
         { this.props.notes.map((note, index) => 
           <Item  
             {...note}
@@ -41,9 +42,7 @@ class NoteList extends React.Component {
             toggleEditing={() => this.props.toggleEditing(note.id)}
             toggleCommenting={() => this.props.toggleCommenting(note.id)}
             editNote={() => this.props.editNote(note.id)}
-            removeNote={() => this.props.removeNote(index)} 
-            isEditing={note.isEditing}
-            isCommenting={note.isCommenting}
+            removeNote={() => this.props.removeNote(index)}
             onEditChange={this.onEditChange}
             onEditSubmit={this.onEditSubmit}
             editName={this.state.editName}

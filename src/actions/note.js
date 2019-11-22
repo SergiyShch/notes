@@ -1,7 +1,10 @@
-import { ADD_NOTE, REMOVE_NOTE, EDIT_NOTE, TOGGLE_EDITING, ADD_COMMENT, TOGGLE_COMMENTING } from '../constants/note'
+import { ADD_LOCAL_NOTE, ADD_FIRE_NOTE, REMOVE_NOTE, EDIT_NOTE, TOGGLE_EDITING, TOGGLE_COMMENTING } from '../constants/note'
+import { store } from '../store'
+
+const state = store.getState();
 
 export const addNote = (note) => ({
-  type: ADD_NOTE,
+  type:  (state.optionReducer.option === 'local') ? ADD_LOCAL_NOTE : ADD_FIRE_NOTE,
   note: { name: note.name , content: note.content }
 });
 
@@ -18,11 +21,6 @@ export const editNote = (edit) => ({
 export const toggleEditing = (id) => ({
   type: TOGGLE_EDITING,
   id
-});
-
-export const addComment = (comment) => ({
-  type: ADD_COMMENT,
-  comment
 });
 
 export const toggleCommenting = (id) => ({

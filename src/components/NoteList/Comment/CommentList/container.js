@@ -1,8 +1,15 @@
 import { connect } from 'react-redux'
 import CommentList from './comment-list'
+import { addComment } from '../../../../actions/comment'
+import { getComment } from '../../../../selectors/comment'
 
-const mapStateToProps = ({commentsReducer: { comments }}) => ({
-  comments
+const mapStateToProps = ({commentsReducer: { comments }, notesReducer: { currentNote }}) => ({
+  comments: getComment(comments, currentNote),
+  currentNote
 });
 
-export default connect(mapStateToProps, null)(CommentList)
+const mapDispatchToProps = (dispatch) => ({
+  addComment: (comment) => dispatch(addComment(comment))
+});
+
+export default connect(mapStateToProps,mapDispatchToProps)(CommentList)

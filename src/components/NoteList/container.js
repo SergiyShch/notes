@@ -2,8 +2,9 @@ import { connect } from 'react-redux'
 import NoteList from './note-list'
 import { removeNote, toggleEditing, toggleCommenting, editNote } from '../../actions/note'
 
-const mapStateToProps = ({ notesReducer: { notes }}) => ({
-  notes
+const mapStateToProps = ({ notesReducer: { notes, currentNote }}) => ({
+  notes,
+  currentNote
 });
 
 const mapDispatchToProps = (dispatch) => ({

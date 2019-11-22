@@ -1,37 +1,34 @@
 import React, {Fragment} from 'react'
 import PropTypes from 'prop-types'
-import CommentFormContainer from './Comment/CommentForm/container'
 import CommentListContainer from './Comment/CommentList/container'
 
-class Item extends React.Component {
-  render() {
-    const { editName, editContent } = this.props;
+const Item = (props) => {
+    const { editName, editContent } = props;
 
     return (
       <Fragment>
         <div className="item">
-          <p>Title: {this.props.name}</p>
-          <p>Content: {this.props.content}</p>
+          <p>Title: {props.name}</p>
+          <p>Content: {props.content}</p>
           <hr/>
           <div className="buttons-row">
-            <button onClick={this.props.removeNote}>REMOVE</button>
-            <button onClick={this.props.toggleEditing}>EDIT</button>
-            <button onClick={this.props.toggleCommenting}>+ADD COMMENT</button>
+            <button onClick={props.removeNote}>REMOVE</button>
+            <button onClick={props.toggleEditing}>EDIT</button>
+            <button onClick={props.toggleCommenting}>+ADD/VIEW COMMENTS</button>
           </div>
         </div>
         
-        { this.props.isEditing &&
+        { props.isEditing &&
           <form>
-            <input name="editName" value={editName} onChange={this.props.onEditChange} placeholder="Title of the Note" required></input>
-            <textarea name="editContent" value={editContent} onChange={this.props.onEditChange} placeholder="Your text..." required></textarea>
-            <button onClick={this.props.onEditSubmit}>Save Changes</button>
+            <input name="editName" value={editName} onChange={props.onEditChange} placeholder="Title of the Note" required></input>
+            <textarea name="editContent" value={editContent} onChange={props.onEditChange} placeholder="Your text..." required></textarea>
+            <button onClick={props.onEditSubmit}>Save Changes</button>
           </form>
         }
-        { this.props.isCommenting && <CommentFormContainer />}
-        <CommentListContainer/>
+        
+        { props.isCommenting && <CommentListContainer />}
       </Fragment>
-    )
-  } 
+    ) 
 }
 
 Item.propTypes = {
