@@ -1,9 +1,15 @@
 import { connect } from 'react-redux'
 import { addNote } from '../../actions/note'
+import { addFireNote } from '../../config/firebase'
 import NoteForm from './note-form'
 
-const mapDispatchToProps = (dispatch) => ({
-  addNote: (note) => dispatch(addNote(note))
+const mapStateToProps = ({optionReducer: { option }}) => ({
+  option
 });
 
-export default connect(null , mapDispatchToProps)(NoteForm)
+const mapDispatchToProps = (dispatch) => ({
+  addNote: (note) => dispatch(addNote(note)),
+  addFireNote: (note) => dispatch(addFireNote(note))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(NoteForm)

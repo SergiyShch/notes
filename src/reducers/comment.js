@@ -1,4 +1,4 @@
-import { ADD_COMMENT } from '../constants/note'
+import { ADD_COMMENT, FETCH_COMMENTS } from '../constants/note'
 
 const defaultState = {
   comments: []
@@ -13,6 +13,10 @@ const commentsReducer = (state = defaultState, action) => {
           ...state.comments,
           action.comment
         ]
+      };
+    case FETCH_COMMENTS:
+      return {
+        comments: action.comments
       };
     default:
       return state

@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { setOption } from '../../actions/option'
+import { fetchNotesThunk } from '../../config/firebase'
+import { store } from '../../store'
 
 class Settings extends React.Component {
   constructor(props) {
@@ -25,6 +27,12 @@ class Settings extends React.Component {
     const { setOption } = this.props;
 
     setOption(this.state.option);
+    
+    const option = store.getState().optionReducer.option;
+
+    if (option === 'firebase') {
+      this.props.fetchNotesThunk();
+    }
   }
 
   render() {
@@ -40,7 +48,8 @@ class Settings extends React.Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-  setOption: (option) => dispatch(setOption(option))
+  setOption: (option) => dispatch(setOption(option)),
+  fetchNotesThunk: () => dispatch(fetchNotesThunk())
 });
 
 Settings.propTypes = {

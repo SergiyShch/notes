@@ -21,12 +21,14 @@ class NoteForm extends Component {
 
   onSubmit() {
     const { name, content } = this.state;
-    const { addNote } = this.props;
+    const { addNote, addFireNote } = this.props;
 
     if (!name || !content) {
       return alert('fill all input fields');
-    } else {
-      addNote({ name, content });
+    } else if (this.props.option === 'firebase'){
+      addFireNote({ name, content });
+    } else { 
+      addNote({name, content})
     }
     
     this.setState({
@@ -52,7 +54,8 @@ class NoteForm extends Component {
 }
 
 NoteForm.propTypes = {
-  addNote: PropTypes.func.isRequired
+  addNote: PropTypes.func.isRequired,
+  addFireNote: PropTypes.func.isRequired
 };
 
 export default NoteForm;

@@ -34,19 +34,28 @@ class CommentList extends React.Component {
 
   onSubmit() {
     const { author, content } = this.state;
-    const { addComment } = this.props;
-    const { currentNote } = this.props;
+    const { addComment, addFireComment, currentNote } = this.props;
+    const createdAt = this.getTime();
 
     if (!author || !content) {
       return alert('fill all input fields')
+    } else if (this.props.option === 'firebase') {
+      addFireComment({ author, content, currentNote, createdAt });
+      this.props.fetchCommentsThunk();
     } else {
-      addComment({ author, content, currentNote });
+      addComment({author, content, currentNote, createdAt})
     }
     
     this.setState({
       author: '',
       content: ''
     })
+  }
+
+  UNSAFE_componentWillMount() {
+    if (this.props.option === 'firebase ') {
+      this.props.fetchCommentsThunk();
+    }
   }
 
   render() {
@@ -59,7 +68,7 @@ class CommentList extends React.Component {
           <input name="content" value={content} onChange={this.onChange} placeholder="Comment" required></input>
           <button onClick={this.onSubmit}>ADD COMMENT</button>
         </form>
-        { this.props.comments.map((comment, index) => <Item key={index} {...comment} time={this.getTime()} />)}
+        { this.props.comments.map((comment, index) => <Item key={index} {...comment} />)}
       </Fragment>
     )
   }

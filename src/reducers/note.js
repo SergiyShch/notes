@@ -1,4 +1,4 @@
-import { ADD_LOCAL_NOTE, REMOVE_NOTE, TOGGLE_EDITING, EDIT_NOTE, TOGGLE_COMMENTING} from '../constants/note'
+import { ADD_NOTE, FETCH_NOTES, REMOVE_NOTE, TOGGLE_EDITING, EDIT_NOTE, TOGGLE_COMMENTING } from '../constants/note'
 
 const defaultState = {
   notes: [],
@@ -7,7 +7,13 @@ const defaultState = {
 
 const notesReducer = (state = defaultState, action) => {
   switch (action.type) {
-    case ADD_LOCAL_NOTE:
+    case FETCH_NOTES:
+      const nState = {...state};
+      return {
+        ...nState, 
+        notes: action.notes
+      };
+    case ADD_NOTE:
       const newState = { ...state }
       const noteId = newState.notes.length; 
       return {

@@ -22,13 +22,25 @@ class NoteList extends React.Component {
 
   onEditSubmit() {
     const { editName, editContent } = this.state;
-    const { editNote } =this.props;
-
-    editNote({ editName, editContent });
+    const { editNote, editFireNote } =this.props;
+    const id = this.props.currentNote;
+    
+    if (this.props.option === 'firebase') {
+      editFireNote({ editName, editContent }, id);
+    } else {
+      editNote({editName, editContent});
+    }
+    
     this.setState({
       editName: '',
       editContent: ''
     })
+  }
+
+  UNSAFE_componentWillMount() {
+    if (this.props.option === 'firebase') {
+      this.props.fetchNotesThunk();
+    }
   }
 
   render() {
@@ -41,8 +53,7 @@ class NoteList extends React.Component {
             key={index}
             toggleEditing={() => this.props.toggleEditing(note.id)}
             toggleCommenting={() => this.props.toggleCommenting(note.id)}
-            editNote={() => this.props.editNote(note.id)}
-            removeNote={() => this.props.removeNote(index)}
+            removeNote={(index) => ((this.props.option === 'local') ? this.props.removeNote(index) : this.props.removeFireNote(note.id))}
             onEditChange={this.onEditChange}
             onEditSubmit={this.onEditSubmit}
             editName={this.state.editName}
@@ -68,9 +79,9 @@ NoteList.propTypes = {
   ),
   removeNote: PropTypes.func.isRequired,
   toggleEditing: PropTypes.func.isRequired,
-  editNote: PropTypes.func.isRequired,
   onEditChange: PropTypes.func.isRequired,
-  onEditSubmit: PropTypes.func.isRequired
+  onEditSubmit: PropTypes.func.isRequired,
+  editFireNote: PropTypes.func.isRequired
 }
 
 export default NoteList;
