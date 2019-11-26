@@ -2,7 +2,6 @@ import React, {Fragment} from 'react'
 import Item from './comment-item'
 import PropTypes from 'prop-types'
 
-
 class CommentList extends React.Component {
   constructor(props) {
     super(props);
@@ -36,14 +35,24 @@ class CommentList extends React.Component {
     const { author, content } = this.state;
     const { addComment, addFireComment, currentNote } = this.props;
     const createdAt = this.getTime();
-
+    
     if (!author || !content) {
-      return alert('fill all input fields')
+      return alert('Fill all input fields');
+    }
+    
+    const strArray = author.split(" ");
+    const first = strArray[0][0];
+    const last = strArray[1][0];
+
+    const isChecked = first.toUpperCase() === first && last.toUpperCase() === last;
+    
+    if (!isChecked) {
+      return alert('Name: Firstname Lastname');
     } else if (this.props.option === 'firebase') {
-      addFireComment({ author, content, currentNote, createdAt });
-      this.props.fetchCommentsThunk();
+        addFireComment({ author, content, currentNote, createdAt });
+        this.props.fetchCommentsThunk();
     } else {
-      addComment({author, content, currentNote, createdAt})
+        addComment({author, content, currentNote, createdAt});
     }
     
     this.setState({
@@ -53,7 +62,7 @@ class CommentList extends React.Component {
   }
 
   UNSAFE_componentWillMount() {
-    if (this.props.option === 'firebase ') {
+    if (this.props.option === 'firebase') {
       this.props.fetchCommentsThunk();
     }
   }

@@ -3,7 +3,6 @@ import { connect } from 'react-redux'
 import PropTypes from 'prop-types'
 import { setOption } from '../../actions/option'
 import { fetchNotesThunk } from '../../config/firebase'
-import { store } from '../../store'
 
 class Settings extends React.Component {
   constructor(props) {
@@ -24,11 +23,10 @@ class Settings extends React.Component {
   
   onSubmit(e) {
     e.preventDefault();
-    const { setOption } = this.props;
+    const { setOption, option } = this.props;
 
     setOption(this.state.option);
-    
-    const option = store.getState().optionReducer.option;
+    localStorage.removeItem('state');
 
     if (option === 'firebase') {
       this.props.fetchNotesThunk();
@@ -47,6 +45,10 @@ class Settings extends React.Component {
   }
 }
 
+const mapStateToProps = ({optionReducer: {option}}) => ({
+  option
+});
+
 const mapDispatchToProps = (dispatch) => ({
   setOption: (option) => dispatch(setOption(option)),
   fetchNotesThunk: () => dispatch(fetchNotesThunk())
@@ -57,4 +59,4 @@ Settings.propTypes = {
 }
 
 
-export default connect(null ,mapDispatchToProps)(Settings);
+export default connect(mapStateToProps,mapDispatchToProps)(Settings);

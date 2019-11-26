@@ -19,7 +19,7 @@ const Item = (props) => {
         </div>
         
         { props.isEditing &&
-          <form>
+          <form className="edit-form">
             <input name="editName" value={editName} onChange={props.onEditChange} placeholder="Title of the Note" required></input>
             <textarea name="editContent" value={editContent} onChange={props.onEditChange} placeholder="Your text..." required></textarea>
             <button onClick={props.onEditSubmit}>Save Changes</button>

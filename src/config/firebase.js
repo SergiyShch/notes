@@ -41,7 +41,7 @@ export const editFireNote = (edit, id) => {
 };
 
 export const addFireComment = comment => async dispatch => {
-  commentsRef.push().set({author: comment.author, content: comment.content, currentNote: comment.currentNote});
+  commentsRef.push().set({author: comment.author, content: comment.content, currentNote: comment.currentNote, createdAt: comment.createdAt});
 }
 
 export function fetchNotesThunk() {
